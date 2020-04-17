@@ -522,6 +522,9 @@ get_incidence_data <- function(first_date = ISOdate(2019,12,1),
                                dplyr::mutate(prov_country = paste0(source,"-", country_name)) %>%
                                 dplyr::filter(!duplicated(prov_country)) %>% dplyr::select(-prov_country),
                             by=c("source"="source"))
+    
+    incid_data <- incid_data %>% dplyr::mutate(FIPS = as.character(FIPS))
+    
     # Add confirmed cases back in
     incid_data <- left_join(incid_data,
                             jhucsse_case_data_state %>% dplyr::mutate(t = as.Date(Update)) %>%
