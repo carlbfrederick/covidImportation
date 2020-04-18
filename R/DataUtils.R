@@ -418,7 +418,7 @@ get_incidence_data <- function(first_date = ISOdate(2019,12,1),
 
     countystate_ <- paste0(dat_$county, ", ", dat_$state)
     data("us_counties", package = "covidImportation") # load county info
-    us_counties <- us_counties %>% dplyr::mutate(countystate = paste0(Name, " County, ", State))
+    us_counties <- as_tibble(us_counties) %>% dplyr::mutate(countystate = paste0(Name, " County, ", State))
     FIPS_ <- us_counties$FIPS[match(countystate_, us_counties$countystate)]
 
     jhucsse_case_data$FIPS[us_co_inds] <- FIPS_

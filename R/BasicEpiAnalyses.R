@@ -61,7 +61,8 @@ est_daily_incidence <- function (cum_data,
     analyze <-   cum_data %>% tidyr::drop_na(Confirmed)
   }
 
-
+  analyze$Update <- as.Date(analyze$Update)
+  
   ##Get the implied daily incidence for each province
   ##by fitting a monitonically increasing spline and then
   ##taking the difference (a little less sensitive to
